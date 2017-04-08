@@ -3,19 +3,21 @@
 using namespace std;
 #include <vector>
 
-void disp(int image[][5], int size){
+void disp(int **image, int size){
   for(int i=0; i<size;i++){
     for(int j=0; j<size;j++){
         printf("%3.4d ",image[i][j]);
     }
     printf("\n");
   }
+  printf("\n");
 }
 
 
-void rotate_matrix( int image[][5], int size){
+void rotate_matrix( int **image, int size){
 
   int t;
+  disp(image,5);
   for(int i = 0 ;i < size/2; i++){
       for(int j=i; j< size-i-1 ; j++){
         t = image[i][j];
@@ -29,10 +31,18 @@ void rotate_matrix( int image[][5], int size){
         image[j][size-i-1] = t;
     }
   }
+  disp(image,5);
 }
 
 int main(){
-  int image[5][5] = { {1,2,3,4,5} , {6,7,8,9,10} , {11,12,13,14,15} , {16,17,18,19,20},{21,22,23,24,25} };
+  int count=0;
+  int ** image = new int *[5];
+  for(int i=0;i<5;i++){
+    image[i] = new int[5];
+    for(int j=0;j<5;j++)
+      image[i][j]=count++;
+  }
+  // int image[5][5] = { {1,2,3,4,5} , {6,7,8,9,10} , {11,12,13,14,15} , {16,17,18,19,20},{21,22,23,24,25} };
   rotate_matrix(image,5);
   return 0;
 }
